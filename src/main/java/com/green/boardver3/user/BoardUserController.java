@@ -1,6 +1,7 @@
 package com.green.boardver3.user;
 
 import com.green.boardver3.user.model.BoardUserInsDto;
+import com.green.boardver3.utils.CommonUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,11 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping
 public class BoardUserController {
-    private BoardUserService service;
+    private final BoardUserService service;
+    private final CommonUtils commonUtils;
 
     @Autowired
-    public BoardUserController(BoardUserService service){
+    public BoardUserController(BoardUserService service, CommonUtils commonUtils){
         this.service=service;
+        this.commonUtils = commonUtils;
     }
 
     @PostMapping("/user")
@@ -26,8 +29,11 @@ public class BoardUserController {
     "gender: [1] 성별(M: 남성, F: 여성),<br>"+
     "addr: [100] 대구시 달서구")
     public int postUser(@RequestBody BoardUserInsDto dto){
+//        String upw = dto.getUpw();
+//        String changeUpw = commonUtils.encodeSha256(upw);
+//        dto.setUpw(changeUpw);
+
+        dto.setUpw(commonUtils.encodeSha256(dto.getUpw()));
         return service.insUser(dto);
     }
-
-
 }

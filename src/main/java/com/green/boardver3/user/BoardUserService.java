@@ -1,5 +1,6 @@
 package com.green.boardver3.user;
 
+import com.green.boardver3.user.model.BoardUserUpdDto;
 import com.green.boardver3.user.model.BoardUserInsDto;
 import com.green.boardver3.user.model.BoardUserLoginDto;
 import com.green.boardver3.user.model.UserLoginVo;
@@ -48,5 +49,11 @@ public class BoardUserService {
          }else if(vo.getUpw().equals(commonUtils.encodeSha256(dto.getUpw()))){
              return 1;
         }   return 3;
+    }
+
+    public int updUser(BoardUserUpdDto dto){
+        dto.setUpw(commonUtils.encodeSha256(dto.getUpw()));
+        return mapper.updUser(dto);
+
     }
 }

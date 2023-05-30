@@ -1,7 +1,6 @@
 package com.green.boardver3.user;
 
 import com.green.boardver3.user.model.BoardUserInsDto;
-import com.green.boardver3.utils.CommonUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,4 +28,6 @@ public class BoardUserController {
     public int postUser(@RequestBody BoardUserInsDto dto){
         return service.insUser(dto);
     }
+
+
 }

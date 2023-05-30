@@ -1,6 +1,7 @@
 package com.green.boardver3.user;
 
 import com.green.boardver3.user.model.BoardUserInsDto;
+import com.green.boardver3.user.model.BoardUserLoginDto;
 import com.green.boardver3.utils.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,8 @@ public class BoardUserService {
             e.printStackTrace();
             return 0;
         }
+    }
+    public int login(BoardUserLoginDto dto){
+        return 0;
     }
 }

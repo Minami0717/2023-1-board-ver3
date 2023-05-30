@@ -1,6 +1,7 @@
 package com.green.boardver3.user;
 
 import com.green.boardver3.user.model.BoardUserInsDto;
+import com.green.boardver3.user.model.BoardUserLoginDto;
 import com.green.boardver3.utils.CommonUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,4 +30,14 @@ public class BoardUserController {
     public int postUser(@RequestBody BoardUserInsDto dto){
         return service.insUser(dto);
     }
+    @PostMapping("/login")
+    @Operation(summary = "로그인",description = "" +
+            "리턴값: " +
+            "(1)로그인 성공, "+
+            "(2)아이디 없음, "+
+            "(3)비밀번호 다름")
+    public int postLoginUser(@RequestBody BoardUserLoginDto dto){
+       return service.login(dto);
+    };
+
 }

@@ -39,5 +39,4 @@ public class BoardUserController {
     public int postLoginUser(@RequestBody BoardUserLoginDto dto){
        return service.login(dto);
     };
-
 }

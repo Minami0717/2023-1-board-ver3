@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping
 public class BoardUserController {
-    private  final BoardUserService service;
+    private BoardUserService service;
 
     @Autowired
     public BoardUserController(BoardUserService service){
@@ -31,6 +31,3 @@ public class BoardUserController {
 
 
 }
-
-
-

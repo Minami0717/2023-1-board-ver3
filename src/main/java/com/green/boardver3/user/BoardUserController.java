@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping
 public class BoardUserController {
     private final BoardUserService service;
-    private final CommonUtils commonUtils;
 
     @Autowired
-    public BoardUserController(BoardUserService service, CommonUtils commonUtils){
+    public BoardUserController(BoardUserService service){
         this.service=service;
-        this.commonUtils = commonUtils;
     }
 
     @PostMapping("/user")
@@ -29,11 +27,6 @@ public class BoardUserController {
     "gender: [1] 성별(M: 남성, F: 여성),<br>"+
     "addr: [100] 대구시 달서구")
     public int postUser(@RequestBody BoardUserInsDto dto){
-//        String upw = dto.getUpw();
-//        String changeUpw = commonUtils.encodeSha256(upw);
-//        dto.setUpw(changeUpw);
-
-        dto.setUpw(commonUtils.encodeSha256(dto.getUpw()));
         return service.insUser(dto);
     }
 }

@@ -9,6 +9,5 @@ public class BoardUserInsDto {
     private  String nm;
     private  char gender;
     private  String addr;
-
 }
 //{uid,upw,nm,gender,addr}

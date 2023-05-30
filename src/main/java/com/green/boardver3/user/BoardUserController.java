@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping
 public class BoardUserController {
-    private BoardUserService service;
+    private final BoardUserService service;
 
     @Autowired
     public BoardUserController(BoardUserService service){

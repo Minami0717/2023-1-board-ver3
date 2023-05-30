@@ -15,6 +15,7 @@ public class BoardUserService {
 
 
     public int insUser(BoardUserInsDto dto){
+       //비밀번호 암호화
        return mapper.insUser(dto);
     }
 

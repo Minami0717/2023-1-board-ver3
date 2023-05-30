@@ -48,7 +48,5 @@ public class BoardUserService {
          }else if(vo.getUpw().equals(commonUtils.encodeSha256(dto.getUpw()))){
              return 1;
         }   return 3;
-
-
     }
 }

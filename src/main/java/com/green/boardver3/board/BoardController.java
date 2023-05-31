@@ -10,41 +10,47 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/board")
-@Tag(name="게시판", description = "설명")
+@Tag(name = "게시판", description = "설명")
 public class BoardController {
- private final BoardService service;
-@Autowired
+    private final BoardService service;
+
+    @Autowired
     public BoardController(BoardService service) {
         this.service = service;
     }
+
     @PostMapping
-    public int postIns(@RequestBody BoardInsDto dto){
-    return service.insBoard(dto);
+    public int postIns(@RequestBody BoardInsDto dto) {
+        return service.insBoard(dto);
     }
+
     @GetMapping
-    public List<BoardVo> getBoard(@RequestParam int page, @RequestParam int row ){
+    public List<BoardVo> getBoard(@RequestParam int page, @RequestParam int row) {
         BoardSelDto dto = new BoardSelDto();
         dto.setRow(row);
         dto.setPage(page);
         return service.selBoard(dto);
     }
+
     @GetMapping("/maxpage")
     public int getBoardMaxPage(@RequestParam int row) {
 
-    return service.selBoardMaxPage(row);
+        return service.selBoardMaxPage(row);
 
-}
+    }
+
     @GetMapping("/{iboard}")
-    public  BoardDetailVo selBoardId(@PathVariable int iboard){
+    public BoardDetailVo selBoardId(@PathVariable int iboard) {
         BoardIboardDto dto = new BoardIboardDto();
         dto.setIboard(iboard);
-    return service.selBoardById(dto);
+        return service.selBoardById(dto);
     }
+
     @DeleteMapping
-    public int delBoardId(@RequestParam int iboard, @RequestParam int iuser){
-       BoardDelDto dto = new BoardDelDto();
-       dto.setIboard(iboard);
-       dto.setIuser(iuser);
-    return service.delBoard(dto);
+    public int delBoardId(@RequestParam int iboard, @RequestParam int iuser) {
+        BoardDelDto dto = new BoardDelDto();
+        dto.setIboard(iboard);
+        dto.setIuser(iuser);
+        return service.delBoard(dto);
     }
 }

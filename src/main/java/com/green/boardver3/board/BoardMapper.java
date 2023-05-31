@@ -8,8 +8,12 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
     int insBoard(BoardInsDto dto);
+
     List<BoardVo> selBoard(BoardSelDto dto);
+
     int selBoardRowCount(int row);
+
     BoardDetailVo selBoardById(BoardIboardDto dto);
+
     int delBoard(BoardDelDto dto);
 }

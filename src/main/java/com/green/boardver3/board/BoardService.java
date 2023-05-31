@@ -9,26 +9,32 @@ import java.util.List;
 @Service
 public class BoardService {
     private final BoardMapper mapper;
-@Autowired
+
+    @Autowired
     public BoardService(BoardMapper mapper) {
         this.mapper = mapper;
     }
-    public int insBoard(BoardInsDto dto){
-    return mapper.insBoard(dto);
+
+    public int insBoard(BoardInsDto dto) {
+        return mapper.insBoard(dto);
     }
-    public List<BoardVo> selBoard(BoardSelDto dto){
-        int page = dto.getPage()-1;
-        dto.setIdx(page*dto.getRow());
+
+    public List<BoardVo> selBoard(BoardSelDto dto) {
+        int page = dto.getPage() - 1;
+        dto.setIdx(page * dto.getRow());
         return mapper.selBoard(dto);
     }
+
     public int selBoardMaxPage(int row) {
         int count = mapper.selBoardRowCount(row);
-        return (int)Math.ceil((double)count / row);
+        return (int) Math.ceil((double) count / row);
     }
-    public BoardDetailVo selBoardById(BoardIboardDto dto){
-    return mapper.selBoardById(dto);
+
+    public BoardDetailVo selBoardById(BoardIboardDto dto) {
+        return mapper.selBoardById(dto);
     }
-    public int delBoard(BoardDelDto dto){
+
+    public int delBoard(BoardDelDto dto) {
         return mapper.delBoard(dto);
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface BoardMapper {
-    int insBoard(BoardInsDto dto);
+    int insBoard(BoardEntity dto);
 
     List<BoardVo> selBoard(BoardSelDto dto);
 
@@ -16,4 +16,7 @@ public interface BoardMapper {
     BoardDetailVo selBoardById(BoardIboardDto dto);
 
     int delBoard(BoardDelDto dto);
+
+    int updBoard(BoardUpdDto dto);
+
 }

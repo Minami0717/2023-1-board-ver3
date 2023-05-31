@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.green.boardver3.board.BoardMapper">
-    <insert id="insBoard">
+    <insert id="insBoard" useGeneratedKeys="true" keyProperty="iboard">
         insert into t_board
         (title,ctnt,iuser)
         values
@@ -36,6 +36,14 @@
         where iboard = #{iboard} and
         iuser = #{iuser}
     </delete>
+
+    <update id = "updBoard">
+        update t_board
+        set title=#{title},
+            ctnt=#{ctnt},
+            iboard=#{iboard}
+        where iboard=#{iboard} and iuser=#{iuser}
+    </update>
 
 
 </mapper>

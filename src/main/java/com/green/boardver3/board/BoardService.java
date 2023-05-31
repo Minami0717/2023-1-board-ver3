@@ -28,6 +28,8 @@ public class BoardService {
     public BoardDetailVo selBoardById(BoardIboardDto dto){
     return mapper.selBoardById(dto);
     }
-
+    public int delBoard(BoardDelDto dto){
+        return mapper.delBoard(dto);
+    }
 }
 

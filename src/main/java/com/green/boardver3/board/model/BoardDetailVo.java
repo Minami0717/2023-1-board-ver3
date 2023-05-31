@@ -9,6 +9,7 @@ import lombok.Getter;
 public class BoardDetailVo {
     private int iboard;
     private String title;
+    private String Ctnt;
     private String createdAt;
     private String writer;
     private String writerMainPic;

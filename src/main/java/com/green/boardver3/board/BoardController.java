@@ -40,6 +40,11 @@ public class BoardController {
         dto.setIboard(iboard);
     return service.selBoardById(dto);
     }
-
-
+    @DeleteMapping
+    public int delBoardId(@RequestParam int iboard, @RequestParam int iuser){
+       BoardDelDto dto = new BoardDelDto();
+       dto.setIboard(iboard);
+       dto.setIuser(iuser);
+    return service.delBoard(dto);
+    }
 }

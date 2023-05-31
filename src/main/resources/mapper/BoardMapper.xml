@@ -37,11 +37,11 @@
         iuser = #{iuser}
     </delete>
 
-    <update id = "updBoard">
+    <update id="updBoard">
         update t_board
         set title=#{title},
-            ctnt=#{ctnt},
-            iboard=#{iboard}
+        ctnt=#{ctnt},
+        iboard=#{iboard}
         where iboard=#{iboard} and iuser=#{iuser}
     </update>
 

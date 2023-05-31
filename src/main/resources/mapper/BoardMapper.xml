@@ -11,12 +11,14 @@
     </insert>
 
 <select id ="selBoard" resultType="BoardVo">
-    select iboard,title,iuser,created_at createdAt
+    select iboard,title,created_at createdAt
     from t_board
     limit #{Idx},#{row}
 </select>
-<select id ="selBoardMaxPage" resultType="int">
-    select ceil(count(*) count/#{row})
-    from t_board
-</select>
+    <select id="selBoardRowCount" resultType="int">
+        SELECT COUNT(iboard)
+        FROM t_board
+    </select>
+
+
 </mapper>

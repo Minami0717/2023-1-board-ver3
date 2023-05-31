@@ -32,7 +32,7 @@ public class BoardController {
         return service.selBoard(dto);
     }
     @GetMapping("/maxpage")
-    public int getBoardMaxPage(@RequestParam int row){
+    public int getBoardMaxPage(@RequestParam int row) {
         return service.selBoardMaxPage(row);
     }
 }

@@ -21,9 +21,11 @@ public class BoardService {
         dto.setIdx(page*dto.getRow());
         return mapper.selBoard(dto);
     }
-    public int selBoardMaxPage(int row){
-    return mapper. SelBoardMaxPage(row);
+    public int selBoardMaxPage(int row) {
+        int count = mapper.selBoardRowCount(row);
+        return (int)Math.ceil((double)count / row);
     }
+
 
 
 

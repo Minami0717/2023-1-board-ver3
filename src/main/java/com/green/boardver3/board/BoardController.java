@@ -2,6 +2,7 @@ package com.green.boardver3.board;
 
 
 import com.green.boardver3.board.model.BoardInsDto;
+import com.green.boardver3.board.model.BoardRowDto;
 import com.green.boardver3.board.model.BoardSelDto;
 import com.green.boardver3.board.model.BoardVo;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -29,5 +30,9 @@ public class BoardController {
         dto.setRow(row);
         dto.setPage(page);
         return service.selBoard(dto);
+    }
+    @GetMapping("/maxpage")
+    public int getBoardMaxPage(@RequestParam int row){
+        return service.selBoardMaxPage(row);
     }
 }

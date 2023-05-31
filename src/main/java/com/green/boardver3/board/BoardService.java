@@ -25,9 +25,9 @@ public class BoardService {
         int count = mapper.selBoardRowCount(row);
         return (int)Math.ceil((double)count / row);
     }
-
-
-
+    public BoardDetailVo selBoardById(BoardIboardDto dto){
+    return mapper.selBoardById(dto);
+    }
 
 }
 

@@ -11,8 +11,11 @@
     </insert>
 
 <select id ="selBoard" resultType="BoardVo">
-    select iboard,title,created_at createdAt
-    from t_board
+    select A.iboard,A.title,A.created_at createdAt,B.nm writer
+    from t_board A
+    inner join t_user B
+    on A.iuser=B.iuser
+    order by iboard desc
     limit #{Idx},#{row}
 </select>
     <select id="selBoardRowCount" resultType="int">
@@ -20,5 +23,12 @@
         FROM t_board
     </select>
 
+ <select id="selBoardById" resultType="BoardDetailVo">
+     select A.iboard,A.title,A.created_at createdAt,B.nm writer,B.main_pic writerMainPic
+     from t_board A
+     inner join t_user B
+     on A.iuser=B.iuser
+     where iboard = #{iboard}
+ </select>
 
 </mapper>

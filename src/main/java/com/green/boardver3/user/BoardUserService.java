@@ -43,7 +43,7 @@ public class BoardUserService {
     }
 
     public int login(BoardUserLoginDto dto){
-        UserLoginVo vo =mapper.selUserByUid(dto);//객체화해줬으니까 null
+        UserLoginVo vo = mapper.selUserByUid(dto);//객체화해줬으니까 null
          if(vo==null){
              return 2;
          }else if(vo.getUpw().equals(commonUtils.encodeSha256(dto.getUpw()))){
@@ -54,6 +54,5 @@ public class BoardUserService {
     public int updUser(BoardUserUpdDto dto){
         dto.setUpw(commonUtils.encodeSha256(dto.getUpw()));
         return mapper.updUser(dto);
-
     }
 }

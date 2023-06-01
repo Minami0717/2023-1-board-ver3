@@ -47,10 +47,11 @@ public class BoardController {
     }
 
     @DeleteMapping
-    public int delBoardId(@RequestParam int iboard, @RequestParam int iuser) {
+    public int delBoardId(@RequestParam int iboard, @RequestParam int iuser) {// 이랬을떄 리퀘스트파람을 주는 이유 !
         BoardDelDto dto = new BoardDelDto();
         dto.setIboard(iboard);
         dto.setIuser(iuser);
+
         return service.delBoard(dto);
     }
 

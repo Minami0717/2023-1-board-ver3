@@ -22,7 +22,7 @@ public class BoardService {
         entity.setIuser(dto.getIuser());
         int result= mapper.insBoard(entity);
         if(result==1){
-            return entity.getIboard();
+            return entity.getIboard(); // 이 작업이 어떤거고 아이보드 값을 리턴해준다는게 어떤 의미인지
         }
         return  result;
     }
@@ -35,7 +35,7 @@ public class BoardService {
 
     public int selBoardMaxPage(int row) {
         int count = mapper.selBoardRowCount(row);
-        return (int) Math.ceil((double) count / row);
+        return (int) Math.ceil((double) count / row); //맥스값을 데리고 나눠주는건 이해했지만  int count =매퍼로 가져가라는걸 이해못함.. 인트가 어떻게 작용하지..?
     }
 
     public BoardDetailVo selBoardById(BoardIboardDto dto) {

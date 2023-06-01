@@ -14,4 +14,19 @@
         (ctnt,iboard,iuser)
         values (#{ctnt},#{iboard},#{iuser})
     </insert>
+
+    <select id="selCmt" resultType="BoardCmtVo">
+        select A.iboard_cmt iboardCmt,A.iboard,A.iuser,B.nm writer,B.main_pic writerMainPic,A.ctnt,A.created_at createdAt
+        from t_board_cmt A
+        inner join t_user B
+        on A.iuser=B.iuser
+        where A.iboard=#{iboard}
+        limit #{idx},#{row}
+    </select>
+
+    <delete id="delCmt">
+        delete
+        from t_board_cmt
+        where iboard_cmt = #{iboardcmt} and iuser =#{iuser}
+    </delete>
 </mapper>

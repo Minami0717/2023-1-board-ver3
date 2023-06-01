@@ -20,21 +20,35 @@ public class CmtService {
         try {
             int result = mapper.insBoardCmt(entity);// 주소값을 복사했기때문에 값을 들고 올 수 있다. 값을 저장한값을 들고온다
             if (result == 1) {
-                return entity.getIboardCmt();
+                return entity.getIboardCmt(); // 등록이 되면 1을 입력해줘라 그리고 pk값이 1증가되므로 그걸 BoardCmtentity에 담아서 get으로 리턴할수있게해라 등록이 안되면 0을 띄워라.
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return 0;
     }
-    List<BoardCmtVo> selCmt(BoardCmtDto dto){
-        dto.setIdx((dto.getPage()-1)* dto.getRow());
-        return mapper.selCmt(dto);
-    }
+   CmtRes selCmt(BoardCmtDto dto) {
+       dto.setIdx((dto.getPage() - 1) * dto.getRow());
+       List<BoardCmtVo> list = mapper.selCmt(dto);
+        int count= mapper.selMaxCmt(dto.getIboard());
+       int page = (int) Math.ceil((double) count / dto.getRow());
+       int ismore = 1;
+       if (dto.getPage() == page) {
+           ismore = 0;
+       }
+       return CmtRes.builder()
+               .list(list)
+               .isMore(ismore)
+               .build();
+   }
+
     int delCmt(BoardCmtDeldto dto){
         return mapper.delCmt(dto);
     }
 
+    int updCmt(BoardCmtEntity entity){
+        return mapper.updCmt(entity);
+    }
 }
 
 

@@ -23,10 +23,21 @@
         where A.iboard=#{iboard}
         limit #{idx},#{row}
     </select>
-
+    <select id="selMaxCmt" resultType="int">
+        select count(1)
+        from t_board_cmt
+        where iboard=#{iboard}
+    </select>
     <delete id="delCmt">
         delete
         from t_board_cmt
         where iboard_cmt = #{iboardcmt} and iuser =#{iuser}
     </delete>
+    <update id ="updCmt">
+        update t_board_cmt
+        set ctnt=#{ctnt} ,updated_at =current_timestamp()
+        where iuser=#{iuser} and iboard_cmt=#{iboardCmt}
+    </update>
+
+
 </mapper>

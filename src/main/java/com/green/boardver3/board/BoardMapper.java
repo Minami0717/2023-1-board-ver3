@@ -11,7 +11,7 @@ public interface BoardMapper {
 
     List<BoardVo> selBoard(BoardSelDto dto);
 
-    int selBoardRowCount(int row);
+    int selBoardRowCount();
 
     BoardDetailVo selBoardById(BoardIboardDto dto);
 

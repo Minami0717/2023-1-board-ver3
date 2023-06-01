@@ -10,4 +10,5 @@ public class BoardCmtEntity {
     private String ctnt;
     private String createdAt;
     private String updatedAt;
+
 }

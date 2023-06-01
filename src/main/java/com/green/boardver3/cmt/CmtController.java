@@ -3,6 +3,7 @@ package com.green.boardver3.cmt;
 import com.green.boardver3.board.model.BoardDelDto;
 import com.green.boardver3.cmt.model.*;
 import jakarta.validation.constraints.Min;
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +29,7 @@ public class CmtController {
     }
 
     @GetMapping("/{iboard}/cmt")
-    public List<BoardCmtVo> GetCmt(@RequestParam int page, @RequestParam (defaultValue = "5") int row, @PathVariable int iboard) {
+    public CmtRes GetCmt(@RequestParam int page, @RequestParam (defaultValue = "5") int row, @PathVariable int iboard) {
         BoardCmtDto dto = new BoardCmtDto();
         dto.setPage(page);
         dto.setRow(row);
@@ -43,7 +44,14 @@ public class CmtController {
         System.out.println(dto1);
         return service.delCmt(dto1);
     }
-
+    @PutMapping("/cmt/{iboardCmt}")
+    public int cmtUpd(@PathVariable int iboardCmt,@RequestBody BoardCmtUpdDto dto ){
+        BoardCmtEntity entity = new BoardCmtEntity();
+        entity.setIboardCmt(iboardCmt);
+        entity.setIuser(dto.getIuser());
+        entity.setCtnt(dto.getCtnt());
+        return service.updCmt(entity);
+    }
 
 
 

@@ -1,6 +1,7 @@
 package com.green.boardver3.board;
 
 import com.green.boardver3.board.model.*;
+import com.green.boardver3.cmt.model.BoardCmtEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,7 @@ public class BoardService {
     }
 
     public int selBoardMaxPage(int row) {
-        int count = mapper.selBoardRowCount(row);
+        int count = mapper.selBoardRowCount();
         return (int) Math.ceil((double) count / row); //맥스값을 데리고 나눠주는건 이해했지만  int count =매퍼로 가져가라는걸 이해못함.. 인트가 어떻게 작용하지..?
     }
 
@@ -47,6 +48,7 @@ public class BoardService {
     }
 
     public int updBoard(BoardUpdDto dto) {
+        BoardCmtEntity entity = new BoardCmtEntity();
         return mapper.updBoard(dto);
     }
 }

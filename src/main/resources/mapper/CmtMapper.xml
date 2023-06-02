@@ -16,7 +16,8 @@
     </insert>
 
     <select id="selCmt" resultType="BoardCmtVo">
-        select A.iboard_cmt iboardCmt,A.iboard,A.iuser,B.nm writer,B.main_pic writerMainPic,A.ctnt,A.created_at createdAt
+        select A.iboard_cmt iboardCmt,A.iboard,A.iuser,B.nm writer,B.main_pic writerMainPic,A.ctnt,A.created_at
+        createdAt
         from t_board_cmt A
         inner join t_user B
         on A.iuser=B.iuser
@@ -29,15 +30,22 @@
         where iboard=#{iboard}
     </select>
     <delete id="delCmt">
-        delete
-        from t_board_cmt
-        where iboard_cmt = #{iboardcmt} and iuser =#{iuser}
+        delete from t_board_cmt
+        where
+        <if test="iboardCmt > 0 and iuser > 0 ">
+            iboard_cmt = #{iboardcmt}
+            and iuser =#{iuser}
+        </if>
+        <if test="iboard >0">
+            iboard = #{iboard}
+        </if>
     </delete>
-    <update id ="updCmt">
+
+
+    <update id="updCmt">
         update t_board_cmt
         set ctnt=#{ctnt} ,updated_at =current_timestamp()
         where iuser=#{iuser} and iboard_cmt=#{iboardCmt}
     </update>
-
 
 </mapper>

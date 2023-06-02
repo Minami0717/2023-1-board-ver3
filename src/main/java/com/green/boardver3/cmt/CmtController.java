@@ -39,7 +39,7 @@ public class CmtController {
     @DeleteMapping("/cmt/{iboardCmt}")
     public int cmtDel(@PathVariable int iboardCmt ,@RequestParam int iuser){
         BoardCmtDeldto dto1 = new BoardCmtDeldto();
-        dto1.setIboardcmt(iboardCmt);
+        dto1.setIboardCmt(iboardCmt);
         dto1.setIuser(iuser);
         System.out.println(dto1);
         return service.delCmt(dto1);

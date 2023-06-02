@@ -10,6 +10,8 @@ public class BoardCmtVo {
     private int iboard;
     private int iuser;
     private String writer;
+
+
     private String writerMainPic;
     private String ctnt;
     private String createdAt;

@@ -10,6 +10,7 @@ spring:
     url: jdbc:mariadb://192.168.0.144:3306/team_a
     username: team_a
     password: green502
+    jdbc-url: jdbc:mariadb://192.168.0.144:3306/team_a
 
 mybatis:
   type-aliases-package: com.green.boardver3

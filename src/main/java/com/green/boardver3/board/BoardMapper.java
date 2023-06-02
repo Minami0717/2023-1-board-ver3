@@ -1,6 +1,7 @@
 package com.green.boardver3.board;
 
 import com.green.boardver3.board.model.*;
+import com.green.boardver3.cmt.model.BoardCmtDeldto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

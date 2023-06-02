@@ -1,18 +1,23 @@
 package com.green.boardver3.board;
 
 import com.green.boardver3.board.model.*;
+import com.green.boardver3.cmt.CmtMapper;
+import com.green.boardver3.cmt.model.BoardCmtDeldto;
 import com.green.boardver3.cmt.model.BoardCmtEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class BoardService {
     private final BoardMapper mapper;
+    private  final CmtMapper cmtMapper;
 
     @Autowired
-    public BoardService(BoardMapper mapper) {
+    public BoardService(BoardMapper mapper, CmtMapper cmtMapper) {
+        this.cmtMapper=cmtMapper;
         this.mapper = mapper;
     }
 
@@ -23,7 +28,7 @@ public class BoardService {
         entity.setIuser(dto.getIuser());
         int result= mapper.insBoard(entity);
         if(result==1){
-            return entity.getIboard(); // 이 작업이 어떤거고 아이보드 값을 리턴해준다는게 어떤 의미인지
+            return entity.getIboard();
         }
         return  result;
     }
@@ -36,15 +41,25 @@ public class BoardService {
 
     public int selBoardMaxPage(int row) {
         int count = mapper.selBoardRowCount();
-        return (int) Math.ceil((double) count / row); //맥스값을 데리고 나눠주는건 이해했지만  int count =매퍼로 가져가라는걸 이해못함.. 인트가 어떻게 작용하지..?
+        return (int) Math.ceil((double) count / row); //정신 차리라
     }
 
     public BoardDetailVo selBoardById(BoardIboardDto dto) {
         return mapper.selBoardById(dto);
     }
 
-    public int delBoard(BoardDelDto dto) {
-        return mapper.delBoard(dto);
+    @Transactional(rollbackFor = Exception.class)
+    public int delBoard(BoardDelDto dto) throws Exception {
+        BoardCmtDeldto cmtDto = new BoardCmtDeldto();
+        cmtDto.setIboard(dto.getIboard());
+        cmtMapper.delCmt(cmtDto);
+        // 그 글에 달려있는 댓글을 전부 삭제해야 함.
+        int result = 0;
+        result = mapper.delBoard(dto);
+        if (result == 0) {
+            throw new Exception("삭제 권한 없음");
+        }
+        return result;
     }
 
     public int updBoard(BoardUpdDto dto) {

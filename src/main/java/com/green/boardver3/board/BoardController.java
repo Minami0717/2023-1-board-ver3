@@ -2,6 +2,7 @@ package com.green.boardver3.board;
 
 
 import com.green.boardver3.board.model.*;
+import com.green.boardver3.cmt.model.BoardCmtDeldto;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -47,11 +48,12 @@ public class BoardController {
     }
 
     @DeleteMapping
-    public int delBoardId(@RequestParam int iboard, @RequestParam int iuser) {// 이랬을떄 리퀘스트파람을 주는 이유 !
+    public int delBoardId(@RequestParam int iboard, @RequestParam int iuser) throws Exception {
+
+
         BoardDelDto dto = new BoardDelDto();
         dto.setIboard(iboard);
         dto.setIuser(iuser);
-
         return service.delBoard(dto);
     }
 

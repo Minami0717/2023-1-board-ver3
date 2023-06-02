@@ -27,22 +27,24 @@ public class CmtService {
         }
         return 0;
     }
-   CmtRes selCmt(BoardCmtDto dto) {
+   public CmtRes selCmt(BoardCmtDto dto) {
        dto.setIdx((dto.getPage() - 1) * dto.getRow());
        List<BoardCmtVo> list = mapper.selCmt(dto);
         int count= mapper.selMaxCmt(dto.getIboard());
-       int page = (int) Math.ceil((double) count / dto.getRow());
+       int maxpage = (int) Math.ceil((double) count / dto.getRow());
        int ismore = 1;
-       if (dto.getPage() == page) {
+       if (dto.getPage() == maxpage) {
            ismore = 0;
        }
        return CmtRes.builder()
+               .maxpage(maxpage)
+               .row(dto.getRow())
                .list(list)
                .isMore(ismore)
                .build();
    }
 
-    int delCmt(BoardCmtDeldto dto){
+    public int delCmt(BoardCmtDeldto dto){
         return mapper.delCmt(dto);
     }
 

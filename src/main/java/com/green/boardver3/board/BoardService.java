@@ -2,22 +2,27 @@ package com.green.boardver3.board;
 
 import com.green.boardver3.board.model.*;
 import com.green.boardver3.cmt.CmtMapper;
+import com.green.boardver3.cmt.CmtService;
 import com.green.boardver3.cmt.model.BoardCmtDeldto;
+import com.green.boardver3.cmt.model.BoardCmtDto;
 import com.green.boardver3.cmt.model.BoardCmtEntity;
+import com.green.boardver3.cmt.model.CmtRes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static java.util.stream.DoubleStream.builder;
+
 @Service
 public class BoardService {
     private final BoardMapper mapper;
-    private  final CmtMapper cmtMapper;
+    private  final CmtService cmtService;
 
     @Autowired
-    public BoardService(BoardMapper mapper, CmtMapper cmtMapper) {
-        this.cmtMapper=cmtMapper;
+    public BoardService(BoardMapper mapper, CmtService cmtService) {
+        this.cmtService=cmtService;
         this.mapper = mapper;
     }
 
@@ -42,17 +47,33 @@ public class BoardService {
     public int selBoardMaxPage(int row) {
         int count = mapper.selBoardRowCount();
         return (int) Math.ceil((double) count / row); //정신 차리라
+
     }
 
-    public BoardDetailVo selBoardById(BoardIboardDto dto) {
-        return mapper.selBoardById(dto);
+    public BoardDetailCmtVo selBoardById(BoardIboardDto dto) {
+        BoardDetailVo vo = mapper.selBoardById(dto);
+        BoardCmtDto dto2 = new BoardCmtDto();
+        dto2.setIboard(dto.getIboard());
+        dto2.setPage(1);
+        dto2.setRow(5);
+        CmtRes cmt= cmtService.selCmt(dto2);
+
+        return BoardDetailCmtVo.builder()
+                .iboard(vo.getIboard())
+                .title(vo.getTitle())
+                .ctnt(vo.getCtnt())
+                .createdAt(vo.getCreatedAt())
+                .writer(vo.getWriter())
+                .writerMainPic(vo.getWriterMainPic())
+                .cmt(cmt)
+                .build();
     }
 
     @Transactional(rollbackFor = Exception.class)
     public int delBoard(BoardDelDto dto) throws Exception {
         BoardCmtDeldto cmtDto = new BoardCmtDeldto();
         cmtDto.setIboard(dto.getIboard());
-        cmtMapper.delCmt(cmtDto);
+        cmtService.delCmt(cmtDto);
         // 그 글에 달려있는 댓글을 전부 삭제해야 함.
         int result = 0;
         result = mapper.delBoard(dto);

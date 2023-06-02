@@ -41,7 +41,7 @@ public class BoardController {
     }
 
     @GetMapping("/{iboard}")
-    public BoardDetailVo selBoardId(@PathVariable int iboard) {
+    public BoardDetailCmtVo selBoardId(@PathVariable int iboard) {
         BoardIboardDto dto = new BoardIboardDto();
         dto.setIboard(iboard);
         return service.selBoardById(dto);
@@ -49,8 +49,6 @@ public class BoardController {
 
     @DeleteMapping
     public int delBoardId(@RequestParam int iboard, @RequestParam int iuser) throws Exception {
-
-
         BoardDelDto dto = new BoardDelDto();
         dto.setIboard(iboard);
         dto.setIuser(iuser);
